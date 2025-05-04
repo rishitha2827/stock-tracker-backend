@@ -9,12 +9,12 @@ cron.schedule('*/1 * * * *', async () => {
     console.log('No alerts');
   }
   for (const alert of alerts) {
-    console.log(alert.symbol);
     try {
       const price = await getStockPrice(alert.symbol);
-      console.log(price);
+      console.log(`${alert.symbol}: ${price}`);
+      
       if (price >= alert.targetPrice) {
-        await sendEmail(
+        /*await sendEmail(
           alert.email, 
           `📈 Stock Alert: Action Required for ${alert.symbol}!`, 
           `We hope this message finds you well.\n\nWe are writing to inform you about a significant update regarding one of your monitored stocks.\n\n
@@ -27,14 +27,15 @@ cron.schedule('*/1 * * * *', async () => {
       Best regards,\n
       [Your Company/Service Name]\n
       [Contact Information]`
-        );
-        //alert.status = 'notified';
+        );`
+        //*/alert.status = 'notified';
         alert.lastNotifiedAt = new Date();
         console.log(`Mail sent to ${alert.email} regarding ${alert.symbol}`);
         await alert.save();
-      }    
+      }
     } catch (error) {
       console.error(`Error fetching stock price for ${alert.symbol}:  ${error}`)
     }
   }
+  console.log((new Date()).toLocaleString());
 });

@@ -5,6 +5,10 @@ const app = express();
 const apiRoutes = require('./routes/api');
 require('./jobs/stockMonitor');
 
+const cors = require("cors");
+app.use(cors({ origin: "http://localhost:5173" }));
+
+
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log('MongoDB connected'))
   .catch(console.error);
