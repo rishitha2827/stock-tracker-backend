@@ -6,7 +6,9 @@ const apiRoutes = require('./routes/api');
 require('./jobs/stockMonitor');
 
 const cors = require("cors");
-app.use(cors({ origin: "http://localhost:5173" }));
+
+const CLIENT_PORT = process.env.CLIENT_PORT;
+app.use(cors({ origin: `http://localhost:${CLIENT_PORT}` }));
 
 
 mongoose.connect(process.env.MONGO_URI)
@@ -16,4 +18,5 @@ mongoose.connect(process.env.MONGO_URI)
 app.use(express.json());
 app.use('/api', apiRoutes);
 
-app.listen(3010, () => console.log('Server running on port 3010'));
+const SERVER_PORT = process.env.SERVER_PORT;
+app.listen(SERVER_PORT, () => console.log(`Server running on port ${SERVER_PORT}`));
