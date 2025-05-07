@@ -116,3 +116,4 @@ A backend application built with **Node.js** and **Express** that monitors stock
   Email: bhaswanth0526@gmail.com
 
 > “Never miss your stock's golden moment.”
+# stock-tracker-backend
