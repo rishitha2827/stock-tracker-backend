@@ -8,7 +8,7 @@ cron.schedule('*/1 * * * *', async () => {
   if (alerts.length == 0) {
     console.log('No alerts');
   }
-  for (const alert of alerts) {
+  for (const alert of alerts) { 
     try {
       const price = await getStockPrice(alert.symbol);
       console.log(`${alert.symbol}: ${price}`);
